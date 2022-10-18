@@ -8,7 +8,8 @@ class PostingsController < ApplicationController
     end 
 
     def create
-        posting = Posting.create(posting_params)
+        byebug
+        posting = Posting.create(user_id: current_user.id, message: params[:message], location_id: params[:location_id])
         render json: { posting: PostingSerializer.new(posting)}
     end 
 
