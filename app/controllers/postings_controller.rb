@@ -7,8 +7,13 @@ class PostingsController < ApplicationController
         
     end 
 
+    def show
+        location = Location.find(params[:id])
+        @postings = location.postings
+        render json: {postings: ActiveModel::Serializer::CollectionSerializer.new(@postings, each_serializer: PostingSerializer)}
+    end
+
     def create
-        byebug
         posting = Posting.create(user_id: current_user.id, message: params[:message], location_id: params[:location_id])
         render json: { posting: PostingSerializer.new(posting)}
     end 
