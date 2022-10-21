@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  # skip_before_action :authorized, only: [:create]  changed to have access to all users without authentication
-  # skip_before_action :authorized 
+  skip_before_action :authorized, only: [:create] 
 
   def index
     users = User.all 
@@ -12,10 +11,14 @@ class UsersController < ApplicationController
   end 
 
   def show
-    user = User.find(params["id"])
-    render json: user.to_json( include: [:taught, :taught_by])
-    
+    @user = User.find(params["id"])
+    render json: @user, serializer: UserSerializer
   end 
+
+  def search
+    @users = User.where("username like?", "%#{params[:name]}%")
+    render json: @users, each_serializer: UserSerializer
+  end
 
   def create
     user = User.create(user_params)
