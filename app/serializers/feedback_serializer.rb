@@ -1,8 +1,8 @@
 class FeedbackSerializer < ActiveModel::Serializer
-    attributes :id, :message, :created_at, :supervisee_username, :supervisee_id
+    attributes :id, :message, :created_at, :supervisor_username, :supervisor_id
 
-    def supervisee_username
-        return object.supervisee.username
+    def supervisor_username
+        return object.supervisor.username
     end
 
   end

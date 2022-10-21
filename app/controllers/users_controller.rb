@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user.valid?
+      user.avatar.attach(params[:avatar])
       render json: { user: UserSerializer.new(user) }, status: :accepted
     else 
       render json: { error: 'Username already exists' }, status: :not_acceptable
@@ -33,7 +34,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :password, :picture)
+    params.require(:user).permit(:username, :password, :position, :plays_like, :height)
   end 
 
 end
