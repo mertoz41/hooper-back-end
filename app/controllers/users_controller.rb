@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
+    user = User.create(username: params[:username], password: params[:password], position: params[:position], height: params[:height], plays_like: params[:plays_like])
     if user.valid?
       user.avatar.attach(params[:avatar])
       render json: { user: UserSerializer.new(user) }, status: :accepted
@@ -32,9 +32,9 @@ class UsersController < ApplicationController
   end 
 
 
-  private
-  def user_params
-    params.require(:user).permit(:username, :password, :position, :plays_like, :height)
-  end 
+  # private
+  # def user_params
+  #   params.require(:user).permit(:username, :password, :position, :play_like, :height)
+  # end 
 
 end
