@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :create]
   resources :postings, only: [:index, :create, :show]
   post '/login', to: 'auth#create'
-  get '/profile', to: 'users#profile'
   get '/check', to: 'auth#checking'
   get '/users/search/:name', to: 'users#search'
 end
