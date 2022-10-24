@@ -11,4 +11,5 @@ class User < ApplicationRecord
     has_many :supervisees, through: :taught, source: :supervisee, dependent: :destroy
 
     validates :username, uniqueness: { case_sensitive: false }
+    validates :username, length: { minimum: 6, maximum: 12}
 end
