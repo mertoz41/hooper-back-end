@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-    before_action :authorized
+    before_action :cors_set_access_control_headers, :authorized
     def encode(payload)
         JWT.encode(payload, 'experiment', 'HS256')
     end 
@@ -36,6 +36,13 @@ class ApplicationController < ActionController::API
     
     def authorized
         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
+    end
+
+    def cors_set_access_control_headers
+        headers['Access-Control-Allow-Origin'] = '*'
+        headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, PATCH, OPTIONS'
+        headers['Access-Control-Request-Method'] = '*'
+        headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
     end
             
 
