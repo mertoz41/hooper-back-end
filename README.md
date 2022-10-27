@@ -10,3 +10,5 @@ Clone the develop branch of the repo and run `bundle install` to install depende
 # Credits
 https://www.youtube.com/watch?v=nDJE8WG0auE&t=131s
 https://www.youtube.com/watch?v=OWBWXOcx1rU&t=435s
+
+Link to frontend code: https://github.com/mertoz41/hooper-front-end
