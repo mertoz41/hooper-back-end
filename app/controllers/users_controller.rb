@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end 
 
   def search
-    @users = User.where("username like?", "%#{params[:name]}%")
+    @users = User.where("lower(username) like?", "%#{params[:name].downcase}%")
     render json: @users, each_serializer: UserSerializer
   end
 
