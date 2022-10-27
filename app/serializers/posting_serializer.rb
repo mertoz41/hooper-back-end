@@ -9,7 +9,7 @@ class PostingSerializer < ActiveModel::Serializer
 
   def avatar
     if object.user.avatar.attached?
-      return url_for(object.user.avatar)
+      return rails_blob_path(object.user.avatar, only_path: true)
     end
   end
 end
